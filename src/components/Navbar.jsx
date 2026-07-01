@@ -1,104 +1,73 @@
-import { useEffect, useState } from 'react'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { useState, useEffect } from 'react';
+import { FiMenu, FiX } from 'react-icons/fi';
 
-const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
-]
-
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  useEffect(() => {
-    const sections = NAV_LINKS.map((link) => document.querySelector(link.href))
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    sections.forEach((sec) => sec && observer.observe(sec))
-    return () => observer.disconnect()
-  }, [])
-
-  const handleLinkClick = () => setMenuOpen(false)
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass shadow-lg shadow-black/20' : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#home" className="font-display text-lg font-semibold tracking-wide text-white">
-          Maira<span className="text-gradient">Tahir</span>
-        </a>
-
-        <ul className="hidden md:flex items-center gap-8 font-body text-sm">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={`transition-colors hover:text-white ${
-                  activeSection === link.href.slice(1) ? 'text-white' : 'text-muted'
-                }`}
-              >
-                {link.label}
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-900/95 backdrop-blur-sm py-4 shadow-lg border-b border-gray-800' : 'bg-transparent py-6'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          <div className="flex-shrink-0">
+            <a href="#home" className="text-2xl font-bold text-white flex items-center gap-2">
+              <span className="text-orange-500">🔥</span> 
+              Maira Tahir
+            </a>
+          </div>
+          
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} className="text-gray-300 hover:text-orange-500 transition-colors text-sm font-medium">
+                {link.name}
               </a>
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href="#contact"
-          className="hidden md:inline-block rounded-full bg-grad-accent px-5 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-105"
-        >
-          Let's Talk
-        </a>
-
-        <button
-          className="md:hidden text-2xl text-white"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle navigation menu"
-        >
-          {menuOpen ? <FiX /> : <FiMenu />}
-        </button>
-      </nav>
-
-      {menuOpen && (
-        <div className="md:hidden glass px-6 pb-6 pt-2">
-          <ul className="flex flex-col gap-4 font-body text-sm">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={handleLinkClick}
-                  className={`block transition-colors hover:text-white ${
-                    activeSection === link.href.slice(1) ? 'text-white' : 'text-muted'
-                  }`}
-                >
-                  {link.label}
-                </a>
-              </li>
             ))}
-          </ul>
+            <a href="/Resume.pdf" className="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-2 rounded-full transition-all duration-300 text-sm font-medium">
+              Download CV
+            </a>
+          </div>
+
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-gray-300 hover:text-white focus:outline-none">
+              {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-gray-900 absolute w-full shadow-xl border-b border-gray-800">
+          <div className="px-4 pt-2 pb-6 space-y-2">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-3 text-base font-medium text-gray-300 hover:text-orange-500 hover:bg-gray-800 rounded-md">
+                {link.name}
+              </a>
+            ))}
+            {/* PLACEHOLDER: Add your CV link in the href */}
+            <a href="/Resume.pdf" className="block w-full text-center mt-4 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-3 rounded-md transition-all duration-300 font-medium">
+              Download CV
+            </a>
+          </div>
         </div>
       )}
-    </header>
-  )
-}
+    </nav>
+  );
+};
+
+export default Navbar;
