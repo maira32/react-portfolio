@@ -1,1 +1,97 @@
 @import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Design tokens — edit these once and they propagate to every component
+   (bg-base, text-muted, font-display, bg-grad-accent, shadow-glow, etc.)
+--------------------------------------------------------------------- */
+@theme {
+  /* Colors */
+  --color-base: #0B1120;
+  --color-surface: #111827;
+  --color-surfaceLight: #1A2436;
+  --color-accent-violet: #8B5CF6;
+  --color-accent-cyan: #22D3EE;
+  --color-muted: #94A3B8;
+
+  /* Fonts */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Gradients (used as bg-grad-accent / bg-grad-radial-glow) */
+  --background-image-grad-accent: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  --background-image-grad-radial-glow: radial-gradient(circle, rgba(139,92,246,0.35) 0%, rgba(34,211,238,0.08) 45%, transparent 70%);
+
+  /* Glow shadows */
+  --shadow-glow: 0 0 40px rgba(139,92,246,0.35);
+  --shadow-glow-cyan: 0 0 40px rgba(34,211,238,0.25);
+
+  /* Animations */
+  --animate-fade-up: fadeUp 0.8s ease forwards;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-base text-slate-200 font-body antialiased;
+}
+
+h1, h2, h3, h4 {
+  @apply font-display;
+}
+
+/* Reusable glass panel effect — used for navbar, cards, etc. */
+.glass {
+  background: rgba(17, 24, 39, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+/* Gradient text helper */
+.text-gradient {
+  background: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Section heading eyebrow label */
+.eyebrow {
+  @apply font-mono text-xs tracking-[0.25em] uppercase text-accent-cyan/80;
+}
+
+/* Simple scroll-reveal helper (paired with IntersectionObserver in useReveal hook) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar for a slightly more premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1120;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b3548;
+  border-radius: 8px;
+}
