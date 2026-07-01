@@ -2,10 +2,15 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // This tells Tailwind to scan your React files
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dark: '#111827',
+        primary: '#f97316', // Orange-500
+      }
+    },
   },
   plugins: [],
 }
