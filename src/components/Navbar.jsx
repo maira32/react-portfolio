@@ -14,14 +14,12 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
-  // Toggle solid/blurred background after scrolling past the hero
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Highlight the nav link for whichever section is currently in view
   useEffect(() => {
     const sections = NAV_LINKS.map((link) => document.querySelector(link.href))
     const observer = new IntersectionObserver(
@@ -47,12 +45,10 @@ export default function Navbar() {
       }`}
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        {/* EDIT ME: replace with your name / logo */}
         <a href="#home" className="font-display text-lg font-semibold tracking-wide text-white">
-          Your<span className="text-gradient">Name</span>
+          Maira<span className="text-gradient">Tahir</span>
         </a>
 
-        {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8 font-body text-sm">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
@@ -75,7 +71,6 @@ export default function Navbar() {
           Let's Talk
         </a>
 
-        {/* Mobile menu toggle */}
         <button
           className="md:hidden text-2xl text-white"
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -85,7 +80,6 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden glass px-6 pb-6 pt-2">
           <ul className="flex flex-col gap-4 font-body text-sm">
