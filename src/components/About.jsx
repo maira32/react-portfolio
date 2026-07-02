@@ -32,20 +32,19 @@ const About = () => {
             <p>
 As a rapid learner and dedicated student, I'm constantly exploring new technologies and seeking out projects that push my skills to the next level.            </p>
           </div>
-
 <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
   {personalInfo.map((info) => (
     <div 
       key={info.label} 
-      className="glass p-4 rounded-xl border border-gray-700/50 hover:border-cyan-400/50 hover:-translate-y-1 transition-all duration-300"
+      className="glass p-4 rounded-xl border border-gray-700/50 hover:border-cyan-400/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
     >
-      <p className="font-mono text-xs text-orange-400 uppercase tracking-widest mb-1">
+      <p className="font-mono text-xs text-orange-400 uppercase tracking-widest mb-1 truncate block">
         {info.label}
       </p>
       
-      <p className="font-body text-white font-semibold text-sm sm:text">
-  {info.value}
-</p>
+      <p className="font-body text-white font-semibold text-sm sm:text break-all">
+        {info.value}
+      </p>
     </div>
   ))}
 </div>
