@@ -59,7 +59,6 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            {/* PLACEHOLDER: Add your CV link in the href */}
             <a href="/Resume.pdf" className="block w-full text-center mt-4 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-3 rounded-md transition-all duration-300 font-medium">
               Download CV
             </a>

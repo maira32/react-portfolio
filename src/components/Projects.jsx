@@ -24,7 +24,6 @@ const ProjectCard = ({ title, description, tech, liveUrl, githubUrl, image }) =>
       </div>
       
       <div className="flex gap-4 mt-auto">
-        {/* PLACEHOLDER: URLs are passed via props below */}
         <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
           <FaExternalLinkAlt size={12} /> Live Demo
         </a>
@@ -68,7 +67,7 @@ const Projects = () => {
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <h4 className="text-orange-500 font-medium mb-2 tracking-wider uppercase text-sm">Portfolio</h4>
-        <h2 className="text-3xl md:text-5xl font-bold text-white">My Works</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-white">My Work</h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
