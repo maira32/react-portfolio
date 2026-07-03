@@ -5,21 +5,49 @@ const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name) newErrors.name = 'Name is required';
     if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (!formData.message) newErrors.message = 'Message is required';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-    } else {
-      setErrors({});
+      return;
+    }
+
+    setErrors({});
+    setIsLoading(true);
+    setApiError('');
+
+    try {
+      const response = await fetch('https://api.yourdomain.com/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message.');
+      }
+
+      // Success
       setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 1000);
       setFormData({ name: '', email: '', message: '' });
+
+      // Reset the success screen back to the form after 4 seconds
+      setTimeout(() => setIsSubmitted(false), 4000);
+
+    } catch (error) {
+      setApiError(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,7 +59,6 @@ const Contact = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-        
         <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 shadow-xl">
           {isSubmitted ? (
              <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
@@ -41,52 +68,34 @@ const Contact = () => {
              </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {apiError && <div className="bg-red-500/10 border border-red-500 text-red-500 p-3 rounded-lg text-sm mb-4 text-center">{apiError}</div>}
+              
               <div>
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  value={formData.name} 
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    if (/^[a-zA-Z\s-]*$/.test(val)) {
-                      setFormData({...formData, name: val});
-                    }
-                  }}
-                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none ${errors.name ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`} 
-                />
+                <input type="text" placeholder="Your Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none ${errors.name ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`} />
                 {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
               </div>
               <div>
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  value={formData.email} 
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none ${errors.email ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`} 
-                />
+                <input type="email" placeholder="Your Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none ${errors.email ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`} />
                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
               <div>
-                <textarea 
-                  rows="4" 
-                  maxLength={1000} 
-                  placeholder="Your Message (Max 1000 characters)" 
-                  value={formData.message} 
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none resize-none ${errors.message ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`}
-                ></textarea>
+                <textarea rows="4" placeholder="Your Message" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none resize-none ${errors.message ? 'border-red-500' : 'border-gray-700 focus:border-orange-500'}`}></textarea>
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
               </div>
-              <button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-lg transition-colors">
-                Send Message
+              <button disabled={isLoading} type="submit" className={`w-full text-white font-bold py-3 rounded-lg transition-colors ${isLoading ? 'bg-orange-500/50 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'}`}>
+                {isLoading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           )}
         </div>
 
+        {/* Right Side: Contact Info (Omitted here for brevity, keep your existing one) */}
         <div className="flex flex-col gap-6 justify-center">
-          
-          <a 
+           {/* ... keep your existing contact info blocks ... */}
+           <a 
             href="mailto:mairatahir3@gmail.com" 
             className="group flex items-center gap-6 p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
           >
@@ -134,12 +143,13 @@ const Contact = () => {
               </span>
             </div>
           </a>
-
         </div>
-
       </div>
     </section>
   );
 };
 
 export default Contact;
+
+
+
