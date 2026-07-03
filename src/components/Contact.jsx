@@ -25,8 +25,8 @@ const Contact = () => {
     setApiError('');
 
     try {
-      const response = await fetch('https://api.yourdomain.com/contact', {
-        method: 'POST',
+      const response = await fetch('https://portfolio-backend-livid-tau.vercel.app/api/contact', {
+  method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
@@ -37,11 +37,9 @@ const Contact = () => {
         throw new Error(data.message || 'Failed to send message.');
       }
 
-      // Success
       setIsSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
 
-      // Reset the success screen back to the form after 4 seconds
       setTimeout(() => setIsSubmitted(false), 4000);
 
     } catch (error) {
@@ -92,9 +90,7 @@ const Contact = () => {
           )}
         </div>
 
-        {/* Right Side: Contact Info (Omitted here for brevity, keep your existing one) */}
         <div className="flex flex-col gap-6 justify-center">
-           {/* ... keep your existing contact info blocks ... */}
            <a 
             href="mailto:mairatahir3@gmail.com" 
             className="group flex items-center gap-6 p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"

@@ -31,7 +31,7 @@ const Signup = ({ setPage }) => {
     setApiSuccess('');
 
     try {
-      const response = await fetch('https://api.yourdomain.com/signup', {
+      const response = await fetch('https://portfolio-backend-livid-tau.vercel.app/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,7 +49,6 @@ const Signup = ({ setPage }) => {
 
       setApiSuccess('Account created successfully! Redirecting to login...');
       
-      // Wait 2 seconds so the user can read the success message, then switch pages
       setTimeout(() => {
         setPage('login');
       }, 2000);

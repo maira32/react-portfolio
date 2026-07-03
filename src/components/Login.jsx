@@ -20,17 +20,16 @@ const Login = ({ setPage }) => {
     
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      return; // Stop execution if frontend validation fails
+      return; 
     }
 
     setErrors({});
     setIsLoading(true);
-    setApiError(''); // Clear any previous errors
+    setApiError(''); 
 
     try {
-      // 1. Make the request to your backend
-      const response = await fetch('https://api.yourdomain.com/login', {
-        method: 'POST',
+      const response = await fetch('https://portfolio-backend-livid-tau.vercel.app/api/login', {
+  method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           email: formData.email, 
@@ -38,24 +37,21 @@ const Login = ({ setPage }) => {
         })
       });
 
-      // 2. Parse the JSON response
       const data = await response.json();
 
-      // 3. Check if the server returned an error status (like 400 or 401)
       if (!response.ok) {
         throw new Error(data.message || 'Invalid email or password');
       }
 
-      // 4. Success! (Usually you save a token here, then redirect)
+localStorage.setItem('portfolio_token', data.token);
+localStorage.setItem('portfolio_user', JSON.stringify(data.user));
+
       console.log('Login successful:', data);
-      // localStorage.setItem('token', data.token); // Example token storage
       setPage('home'); 
 
     } catch (error) {
-      // Catch network errors or errors we threw manually
       setApiError(error.message);
     } finally {
-      // Turn off the loading state regardless of success or failure
       setIsLoading(false);
     }
   };
