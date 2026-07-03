@@ -8,10 +8,10 @@ const personalInfo = [
 
 const About = () => {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="bg-gray-800/30 rounded-[2rem] p-8 md:p-16 border border-gray-700/50 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="bg-gray-800/30 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 md:p-16 border border-gray-700/50 flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-20">
         
-        <div className="w-full lg:w-5/12">
+        <div className="w-full max-w-xs sm:max-w-sm lg:max-w-none lg:w-5/12">
          <img 
   src="/img2.jpg" 
   alt="About Me" 
@@ -19,30 +19,30 @@ const About = () => {
 />
         </div>
         
-        <div className="w-full lg:w-7/12">
+        <div className="w-full lg:w-7/12 text-center lg:text-left">
           <h4 className="text-orange-500 font-medium mb-2 tracking-wider uppercase text-sm">I'm a Developer</h4>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
             Turning Ideas into Interactive Web Apps
           </h2>
           
-          <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
+          <div className="space-y-4 text-gray-400 text-base sm:text-lg leading-relaxed">
             <p>
             Hi, I'm Maira! I'm a student and Full-Stack Developer specializing in the MERN stack. I thrive on building fast, responsive web applications from the ground up using React, Node.js, and Tailwind CSS.
             </p>
             <p>
 As a rapid learner and dedicated student, I'm constantly exploring new technologies and seeking out projects that push my skills to the next level.            </p>
           </div>
-<div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
+<div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
   {personalInfo.map((info) => (
     <div 
       key={info.label} 
-      className="glass p-4 rounded-xl border border-gray-700/50 hover:border-cyan-400/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+      className="glass p-4 rounded-xl border border-gray-700/50 hover:border-cyan-400/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden text-left"
     >
       <p className="font-mono text-xs text-orange-400 uppercase tracking-widest mb-1 truncate block">
         {info.label}
       </p>
       
-      <p className="font-body text-white font-semibold text-sm sm:text break-all">
+      <p className="font-body text-white font-semibold text-sm sm:text break-words">
         {info.value}
       </p>
     </div>

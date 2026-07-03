@@ -50,14 +50,14 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-16">
+    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="text-center mb-12 sm:mb-16">
         <h4 className="text-orange-500 font-medium mb-2 tracking-wider uppercase text-sm">Get In Touch</h4>
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Let's Work Together</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6">Let's Work Together</h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-        <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 shadow-xl">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 max-w-5xl mx-auto">
+        <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl border border-gray-700 shadow-xl">
           {isSubmitted ? (
              <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
                 <div className="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center text-3xl">✓</div>
@@ -65,7 +65,7 @@ const Contact = () => {
                 <p className="text-gray-400">I'll get back to you as soon as possible.</p>
              </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
               {apiError && <div className="bg-red-500/10 border border-red-500 text-red-500 p-3 rounded-lg text-sm mb-4 text-center">{apiError}</div>}
               
               <div>
@@ -90,13 +90,13 @@ const Contact = () => {
           )}
         </div>
 
-        <div className="flex flex-col gap-6 justify-center">
+        <div className="flex flex-col gap-4 sm:gap-6 justify-center">
            <a 
             href="mailto:mairatahir3@gmail.com" 
-            className="group flex items-center gap-6 p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
+            className="group flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
           >
-            <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
-              <FaEnvelope size={20} />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
+              <FaEnvelope size={18} />
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-white font-semibold">Email</h4>
@@ -110,10 +110,10 @@ const Contact = () => {
             href="https://www.linkedin.com/in/maira-tahir-380a38308"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-6 p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
+            className="group flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
           >
-            <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
-              <FaLinkedin size={20} />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
+              <FaLinkedin size={18} />
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-white font-semibold">LinkedIn</h4>
@@ -127,10 +127,10 @@ const Contact = () => {
             href="https://github.com/maira32"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-6 p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
+            className="group flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-gray-800/30 hover:bg-gray-800/50 rounded-2xl border border-gray-700/50 hover:border-gray-600 transition-all cursor-pointer overflow-hidden"
           >
-            <div className="w-14 h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
-              <FaGithub size={20} />
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-900 rounded-full flex items-center justify-center text-orange-500 shrink-0">
+              <FaGithub size={18} />
             </div>
             <div className="flex-1 min-w-0">
               <h4 className="text-white font-semibold">GitHub</h4>
@@ -146,6 +146,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-
-

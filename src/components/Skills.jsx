@@ -2,11 +2,11 @@ import { SiCplusplus, SiPython, SiNodedotjs, SiExpress, SiWordpress, SiPhp, SiHt
 import { FaNetworkWired, FaServer } from 'react-icons/fa';
 
 const SkillCard = ({ icon, name }) => (
-  <div className="flex flex-col items-center justify-center p-6 bg-gray-800/40 rounded-2xl border border-gray-700 hover:border-orange-500/50 hover:bg-gray-800 transition-all duration-300 group shadow-lg">
-    <div className="text-4xl mb-4 text-gray-400 group-hover:text-white transition-colors duration-300 group-hover:scale-110 transform">
+  <div className="flex flex-col items-center justify-center p-4 sm:p-6 bg-gray-800/40 rounded-2xl border border-gray-700 hover:border-orange-500/50 hover:bg-gray-800 transition-all duration-300 group shadow-lg">
+    <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 text-gray-400 group-hover:text-white transition-colors duration-300 group-hover:scale-110 transform">
       {icon}
     </div>
-    <span className="text-sm font-medium text-gray-300 text-center">{name}</span>
+    <span className="text-xs sm:text-sm font-medium text-gray-300 text-center">{name}</span>
   </div>
 );
 
@@ -34,17 +34,17 @@ const Skills = () => {
   const categories = ['Frontend', 'Backend', 'Tools & Other'];
 
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-16">
+    <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="text-center mb-12 sm:mb-16">
         <h4 className="text-orange-500 font-medium mb-2 tracking-wider uppercase text-sm">My Expertise</h4>
-        <h2 className="text-3xl md:text-5xl font-bold text-white">Skills & Technologies</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">Skills & Technologies</h2>
       </div>
 
-      <div className="space-y-16">
+      <div className="space-y-12 sm:space-y-16">
         {categories.map(category => (
           <div key={category}>
-            <h3 className="text-xl md:text-2xl font-semibold text-white mb-8 pb-3 border-b border-gray-800 inline-block">{category}</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-6 sm:mb-8 pb-3 border-b border-gray-800 inline-block">{category}</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
               {skillsData.filter(skill => skill.category === category).map((skill, index) => (
                 <SkillCard key={index} icon={skill.icon} name={skill.name} />
               ))}

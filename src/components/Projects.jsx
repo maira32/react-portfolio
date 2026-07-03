@@ -1,7 +1,7 @@
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const ProjectCard = ({ title, description, tech, liveUrl, githubUrl, image }) => (  <div className="bg-gray-800/30 rounded-2xl overflow-hidden border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 group flex flex-col h-full shadow-lg">
-    <div className="relative overflow-hidden h-56">
+    <div className="relative overflow-hidden h-48 sm:h-56">
       <img 
   src={image} 
   alt="Project preview" 
@@ -9,8 +9,8 @@ const ProjectCard = ({ title, description, tech, liveUrl, githubUrl, image }) =>
 />
     </div>
     
-    <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+    <div className="p-5 sm:p-6 flex flex-col flex-grow">
+      <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">{title}</h3>
       <p className="text-gray-400 text-sm mb-6 flex-grow leading-relaxed">
         {description}
       </p>
@@ -23,7 +23,7 @@ const ProjectCard = ({ title, description, tech, liveUrl, githubUrl, image }) =>
         ))}
       </div>
       
-      <div className="flex gap-4 mt-auto">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-auto">
         <a href={liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-2.5 rounded-xl text-sm font-medium transition-colors">
           <FaExternalLinkAlt size={12} /> Live Demo
         </a>
@@ -64,13 +64,13 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-16">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="text-center mb-12 sm:mb-16">
         <h4 className="text-orange-500 font-medium mb-2 tracking-wider uppercase text-sm">Portfolio</h4>
-        <h2 className="text-3xl md:text-5xl font-bold text-white">My Work</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">My Work</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {projectsData.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}

@@ -57,13 +57,13 @@ localStorage.setItem('portfolio_user', JSON.stringify(data.user));
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative">
-      <button onClick={() => setPage('home')} className="inline-block mb-8 md:mb-0 md:absolute top-8 left-8 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-2 rounded-full transition-all duration-300 text-sm font-medium">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-4 relative">
+      <button onClick={() => setPage('home')} className="inline-block mb-8 md:mb-0 md:absolute top-8 left-4 sm:left-8 border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-5 py-2 rounded-full transition-all duration-300 text-sm font-medium">
         ← Back to Portfolio
       </button>
 
-      <div className="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 w-full max-w-md shadow-2xl">
-        <h2 className="text-3xl font-bold text-white mb-6 text-center">Welcome Back</h2>
+      <div className="bg-gray-800/50 p-6 sm:p-8 rounded-2xl border border-gray-700 w-full max-w-md shadow-2xl">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">Welcome Back</h2>
         
         {apiError && (
           <div className="bg-red-500/10 border border-red-500 text-red-500 p-3 rounded-lg text-sm mb-4 text-center">
@@ -74,14 +74,14 @@ localStorage.setItem('portfolio_user', JSON.stringify(data.user));
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-400 text-sm font-medium mb-2">Email</label>
-            <input type="email" placeholder='Email' value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+            <input type="email" placeholder='Email' autoComplete="off" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
               className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${errors.email ? 'border-red-500 focus:ring-red-500' : 'border-gray-700 focus:border-orange-500 focus:ring-orange-500/50'}`} />
             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
 
           <div>
             <label className="block text-gray-400 text-sm font-medium mb-2">Password</label>
-            <input type="password" placeholder="Password" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}
+            <input type="password" placeholder="Password" autoComplete="new-password" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}
               className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-700 focus:border-orange-500 focus:ring-orange-500/50'}`} />
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
           </div>
@@ -104,11 +104,3 @@ localStorage.setItem('portfolio_user', JSON.stringify(data.user));
 };
 
 export default Login;
-
-
-
-
-
- 
-
-   
