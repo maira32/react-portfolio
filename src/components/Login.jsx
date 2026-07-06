@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-const Login = ({ setPage }) => {
+const Login = ({ setPage, onLoginSuccess }) => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const validate = () => {
     const newErrors = {};
@@ -47,6 +49,7 @@ localStorage.setItem('portfolio_token', data.token);
 localStorage.setItem('portfolio_user', JSON.stringify(data.user));
 
       console.log('Login successful:', data);
+      if (onLoginSuccess) onLoginSuccess(data.user);
       setPage('home'); 
 
     } catch (error) {
@@ -81,9 +84,25 @@ localStorage.setItem('portfolio_user', JSON.stringify(data.user));
 
           <div>
             <label className="block text-gray-400 text-sm font-medium mb-2">Password</label>
-            <input type="password" placeholder="Password" autoComplete="new-password" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}
-              className={`w-full bg-gray-900 text-white px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-700 focus:border-orange-500 focus:ring-orange-500/50'}`} />
+            <div className="relative">
+              <input type={showPassword ? 'text' : 'password'} placeholder="Password" autoComplete="new-password" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}
+                className={`w-full bg-gray-900 text-white px-4 py-3 pr-11 rounded-lg border focus:outline-none focus:ring-2 transition-colors ${errors.password ? 'border-red-500 focus:ring-red-500' : 'border-gray-700 focus:border-orange-500 focus:ring-orange-500/50'}`} />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-orange-500 transition-colors"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                tabIndex={-1}
+              >
+                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+              </button>
+            </div>
             {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+            <div className="text-right mt-2">
+              <button type="button" onClick={() => setPage('forgot-password')} className="text-orange-500 hover:underline text-sm font-medium">
+                Forgot password?
+              </button>
+            </div>
           </div>
 
           <button 
